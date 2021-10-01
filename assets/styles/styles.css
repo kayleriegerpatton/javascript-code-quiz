@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+  border: solid black 1px;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#timer {
+}
+
+#main-container {
+}
+
+.start-text {
+  text-align: center;
+}
+
+#quiz-title {
+  text-align: center;
+}
+
+#button-container {
+}
+
+#start-quiz {
+  margin: 0 auto;
+}
