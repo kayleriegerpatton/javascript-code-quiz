@@ -1,6 +1,16 @@
 // GLOBAL VARIABLES
 
-const timeRemaining = 30;
+let counter = 10;
+const timerTick = function () {
+  if (counter <= 0) {
+    console.log("boom");
+    clearInterval(timer);
+  } else {
+    console.log(counter);
+    counter -= 1;
+  }
+};
+
 const questionsArray = [
   {
     question: "What tag is used to link a JavaScript file to an HTML file?",
@@ -47,6 +57,9 @@ const startButton = document.querySelector("#start-button");
 
 // target start-container div for removal
 const startContainer = document.querySelector("#start-container");
+
+// declare timer
+const timer = setInterval(timerTick, 1000);
 
 // FUNCTION DECLARATIONS/EXECUTION
 // start quiz
