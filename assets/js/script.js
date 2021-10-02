@@ -42,9 +42,16 @@ const questionsArray = [
   },
 ];
 
-// FUNCTION DECLARATIONS/EXECUTION
+// target start quiz button
+const startButton = document.querySelector("#start-button");
 
+// FUNCTION DECLARATIONS/EXECUTION
 // start quiz
-// remove div card
-//  start timer
-// render question card
+const startQuiz = function () {
+  console.log("start quiz");
+  // remove div card
+  // start timer
+  // render question card
+  return;
+};
+startButton.addEventListener("click", startQuiz);
