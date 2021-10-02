@@ -45,11 +45,15 @@ const questionsArray = [
 // target start quiz button
 const startButton = document.querySelector("#start-button");
 
+// target start-container div for removal
+const startContainer = document.querySelector("#start-container");
+
 // FUNCTION DECLARATIONS/EXECUTION
 // start quiz
 const startQuiz = function () {
-  console.log("start quiz");
   // remove div card
+  startContainer.remove();
+  console.log("removed starting div");
   // start timer
   // render question card
   return;
