@@ -48,20 +48,20 @@ const questionsArray = [
   },
 ];
 
-// TARGET ELEMENTS
+// TARGET HTML ELEMENTS
 const counterSpan = document.querySelector("#timer");
 const headerContainer = document.querySelector(".header-container");
 const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
-const answerButton = document.querySelector("#answer1");
-const buttonContainer = document.querySelector("#answer-buttons");
-const questionText = document.querySelector("#question-text");
-const questionContainer = document.querySelector("#question-container");
 const mainContainer = document.querySelector("#main-container");
-const newStartButton = document.querySelector("#new-start-button");
-const newStartDiv = document.querySelector("#new-start-div");
-const gameOverMessage = document.querySelector("#game-over-text");
-const gameOverTitle = document.querySelector("#game-over");
+// const answerButton = document.querySelector("#answer1");
+// const buttonContainer = document.querySelector("#answer-buttons");
+// const questionText = document.querySelector("#question-text");
+// const questionContainer = document.querySelector("#question-container");
+// const newStartButton = document.querySelector("#new-start-button");
+// const newStartDiv = document.querySelector("#new-start-div");
+// const gameOverMessage = document.querySelector("#game-over-text");
+// const gameOverTitle = document.querySelector("#game-over");
 
 const renderQuestion = function () {
   // increment question index, run function again passing the new index number
@@ -101,31 +101,35 @@ const verifyAnswer = function () {
   return;
 };
 
+// renderGameOver if counter === 0
 const renderGameOver = function () {
-  //   questionContainer.remove();
+  questionContainer.remove();
+
   //   render new start button
   const newStartButton = document.createElement("button");
   newStartButton.setAttribute("id", "new-start-button");
   newStartButton.setAttribute("class", "button");
-  newStartButton.textContent("Start Quiz");
+  newStartButton.textContent = "Start Quiz";
 
-  // render button div, append child button, append to main
+  // render button div, append child button
   const newStartDiv = document.createElement("div");
   newStartDiv.setAttribute("id", "new-start-div");
   newStartDiv.appendChild(newStartButton);
-  mainContainer.appendChild(newStartDiv);
 
-  // render game over message p, append to main
+  // render game over message p
   const gameOverMessage = document.createElement("p");
   gameOverMessage.setAttribute("id", "game-over-text");
-  gameOverMessage.textContent("Times up! View your high scores or try again.");
-  mainContainer.appendChild(gameOverMessage);
+  gameOverMessage.textContent = "Times up! View your high scores or try again.";
 
-  // render Game Over h1, append to main
+  // render Game Over h1
   const gameOverTitle = document.createElement("h1");
   gameOverTitle.setAttribute("id", "game-over");
-  gameOverTitle.textContent("GAME OVER");
+  gameOverTitle.textContent = "GAME OVER";
+
+  // append children to main container
   mainContainer.appendChild(gameOverTitle);
+  mainContainer.appendChild(gameOverMessage);
+  mainContainer.appendChild(newStartDiv);
 };
 
 const renderScore = function () {
@@ -165,7 +169,12 @@ const startQuiz = function () {
   renderQuestion();
 
   // verify answer
-  // if incorrect then deduct timer value }
+  //   if incorrect then deduct timer value }
+
+  // if answered all questions then:
+  //   render score from counter value
+  //   register score to local storage
+  //   render high scores page, pull from local storage
 
   return;
 };
@@ -174,3 +183,6 @@ const startQuiz = function () {
 startButton.addEventListener("click", startQuiz);
 
 // select answer click event
+
+// restart quiz click event
+mainContainer.addEventListener("click", startQuiz);
