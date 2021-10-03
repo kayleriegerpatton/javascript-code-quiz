@@ -53,7 +53,7 @@ body {
 }
 
 .button {
-  margin: 0 auto;
+  margin: 5px auto;
   color: #ffff;
   background-color: var(--purple);
   border-radius: 10%;

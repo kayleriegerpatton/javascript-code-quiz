@@ -2,6 +2,9 @@
 
 let counter = 60;
 
+// get index number
+let questionIndex = 0;
+
 // declare questions/answers array
 const questionsArray = [
   {
@@ -55,36 +58,44 @@ const questionContainer = document.querySelector("#question-container");
 const mainContainer = document.querySelector("#main-container");
 
 const timerTick = function () {
-  if (counter <= 0) {
+  if (counter < 0) {
     console.log("boom");
     clearInterval(timer);
     // render next page (results or high scores?)
   } else {
     counterSpan.textContent = counter;
-    console.log(counter);
     counter -= 1;
   }
 };
 
 const renderQuestion = function () {
-  const answerButton = document.createElement("button");
-  answerButton.setAttribute("class", "button");
-  answerButton.textContent = "Answer1";
+  // increment question index, run function again passing the new index number
+
+  // store question
+  let currentQuestion = questionsArray[questionIndex];
 
   const buttonContainer = document.createElement("div");
   buttonContainer.setAttribute("id", "answer-buttons");
-  buttonContainer.appendChild(answerButton);
+
+  const renderAnswers = function (eachAnswer, index) {
+    const answerButton = document.createElement("button");
+    answerButton.setAttribute("class", "button");
+    answerButton.setAttribute("id", index);
+    answerButton.textContent = eachAnswer;
+    buttonContainer.appendChild(answerButton);
+  };
+  currentQuestion.answers.forEach(renderAnswers);
 
   const questionText = document.createElement("h2");
   questionText.setAttribute("id", "question-text");
-  questionText.textContent = "Question text goes here";
+  questionText.textContent = currentQuestion.question;
 
   const questionContainer = document.createElement("div");
   questionContainer.setAttribute("id", "question-container");
-  questionContainer.appendChild(buttonContainer, questionText);
+  questionContainer.appendChild(questionText);
+  questionContainer.appendChild(buttonContainer);
 
   mainContainer.appendChild(questionContainer);
-  return;
 };
 
 const renderGameOver = function () {
@@ -103,8 +114,6 @@ const renderHighScores = function () {
   return;
 };
 
-const timer = setInterval(timerTick, 1000);
-
 // start quiz
 const startQuiz = function () {
   // remove div card
@@ -112,7 +121,7 @@ const startQuiz = function () {
   console.log("removed starting div");
 
   // start timer
-  timerTick(timer);
+  setInterval(timerTick, 1000);
 
   // render question card
   renderQuestion();
