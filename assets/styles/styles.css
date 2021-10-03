@@ -68,7 +68,7 @@ body {
   text-align: center;
 }
 
-#question-buttons {
+#answer-buttons {
   display: flex;
   flex-direction: column;
 }
