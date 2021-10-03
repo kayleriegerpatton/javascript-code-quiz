@@ -63,6 +63,17 @@ body {
   background-color: var(--button-hover);
 }
 
+/* Question Cards */
+#question-text {
+  text-align: center;
+}
+
+#question-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+/* High Scores Page */
 #scores-container {
   max-width: 500px;
   margin: auto;

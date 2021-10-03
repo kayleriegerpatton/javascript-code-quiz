@@ -1,16 +1,42 @@
 // GLOBAL VARIABLES
 
-let counter = 10;
+let counter = 60;
 const timerTick = function () {
   if (counter <= 0) {
     console.log("boom");
     clearInterval(timer);
+    // render next page (results or high scores?)
   } else {
+    counterSpan.textContent = counter;
     console.log(counter);
     counter -= 1;
   }
 };
 
+const renderQuestion = function () {
+  return;
+};
+
+const renderGameOver = function () {
+  return;
+};
+
+const renderScore = function () {
+  return;
+};
+
+const registerScore = function () {
+  return;
+};
+
+const renderHighScores = function () {
+  return;
+};
+
+// declare timer
+const timer = setInterval(timerTick, 1000);
+
+// declare questions/answers array
 const questionsArray = [
   {
     question: "What tag is used to link a JavaScript file to an HTML file?",
@@ -52,23 +78,28 @@ const questionsArray = [
   },
 ];
 
+// TARGET ELEMENTS
+// target counter span
+const counterSpan = document.querySelector("#timer");
+
 // target start quiz button
 const startButton = document.querySelector("#start-button");
 
 // target start-container div for removal
 const startContainer = document.querySelector("#start-container");
 
-// declare timer
-const timer = setInterval(timerTick, 1000);
-
-// FUNCTION DECLARATIONS/EXECUTION
+// EXECUTION
 // start quiz
 const startQuiz = function () {
   // remove div card
   startContainer.remove();
   console.log("removed starting div");
+
   // start timer
+  timerTick(timer);
   // render question card
   return;
 };
+
+// start quiz click event
 startButton.addEventListener("click", startQuiz);
