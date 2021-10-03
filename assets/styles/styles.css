@@ -54,6 +54,7 @@ body {
 
 .button {
   margin: 5px auto;
+  padding: 5px;
   color: #ffff;
   background-color: var(--purple);
   border-radius: 10%;
@@ -68,9 +69,26 @@ body {
   text-align: center;
 }
 
+#question-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 #answer-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 400px;
+}
+
+.answerButton {
+  margin: 5px 10px;
+  padding: 5px;
+  color: #ffff;
+  background-color: var(--purple);
+  border-radius: 10%;
 }
 
 /* High Scores Page */
