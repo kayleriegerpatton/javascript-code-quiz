@@ -1,9 +1,9 @@
 // GLOBAL VARIABLES
 
-// declare timer value
+// set timer start value
 let counter = 3;
 
-// get index number
+// set questions/answers array index number
 let questionIndex = 0;
 
 // declare questions/answers array
@@ -50,6 +50,7 @@ const questionsArray = [
 
 // TARGET ELEMENTS
 const counterSpan = document.querySelector("#timer");
+const headerContainer = document.querySelector(".header-container");
 const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
 const answerButton = document.querySelector("#answer1");
@@ -57,6 +58,10 @@ const buttonContainer = document.querySelector("#answer-buttons");
 const questionText = document.querySelector("#question-text");
 const questionContainer = document.querySelector("#question-container");
 const mainContainer = document.querySelector("#main-container");
+const newStartButton = document.querySelector("#new-start-button");
+const newStartDiv = document.querySelector("#new-start-div");
+const gameOverMessage = document.querySelector("#game-over-text");
+const gameOverTitle = document.querySelector("#game-over");
 
 const renderQuestion = function () {
   // increment question index, run function again passing the new index number
@@ -64,9 +69,11 @@ const renderQuestion = function () {
   // store current question
   let currentQuestion = questionsArray[questionIndex];
 
+  //   create buttons div
   const buttonContainer = document.createElement("div");
   buttonContainer.setAttribute("id", "answer-buttons");
 
+  //   create answer buttons and append
   const renderAnswers = function (eachAnswer, index) {
     const answerButton = document.createElement("button");
     answerButton.setAttribute("class", "answerButton");
@@ -76,10 +83,12 @@ const renderQuestion = function () {
   };
   currentQuestion.answers.forEach(renderAnswers);
 
+  //   create question text
   const questionText = document.createElement("h2");
   questionText.setAttribute("id", "question-text");
   questionText.textContent = currentQuestion.question;
 
+  //   create question container div and append 2 children
   const questionContainer = document.createElement("div");
   questionContainer.setAttribute("id", "question-container");
   questionContainer.appendChild(questionText);
@@ -88,8 +97,35 @@ const renderQuestion = function () {
   mainContainer.appendChild(questionContainer);
 };
 
-const renderGameOver = function () {
+const verifyAnswer = function () {
   return;
+};
+
+const renderGameOver = function () {
+  //   questionContainer.remove();
+  //   render new start button
+  const newStartButton = document.createElement("button");
+  newStartButton.setAttribute("id", "new-start-button");
+  newStartButton.setAttribute("class", "button");
+  newStartButton.textContent("Start Quiz");
+
+  // render button div, append child button, append to main
+  const newStartDiv = document.createElement("div");
+  newStartDiv.setAttribute("id", "new-start-div");
+  newStartDiv.appendChild(newStartButton);
+  mainContainer.appendChild(newStartDiv);
+
+  // render game over message p, append to main
+  const gameOverMessage = document.createElement("p");
+  gameOverMessage.setAttribute("id", "game-over-text");
+  gameOverMessage.textContent("Times up! View your high scores or try again.");
+  mainContainer.appendChild(gameOverMessage);
+
+  // render Game Over h1, append to main
+  const gameOverTitle = document.createElement("h1");
+  gameOverTitle.setAttribute("id", "game-over");
+  gameOverTitle.textContent("GAME OVER");
+  mainContainer.appendChild(gameOverTitle);
 };
 
 const renderScore = function () {
@@ -104,30 +140,37 @@ const renderHighScores = function () {
   return;
 };
 
-// set timer display function
+// set timer & display function
 const timerTick = function () {
   if (counter < 0) {
-    console.log("boom");
+    console.log("BOOM");
     clearInterval(timer);
+    // renderGameOver();
   } else {
     counterSpan.textContent = counter;
     counter -= 1;
   }
 };
 
-// timer
+// timer interval
 const timer = setInterval(timerTick, 1000);
 
 // start quiz
 const startQuiz = function () {
   // remove div card
   startContainer.remove();
-  console.log("removed starting div");
 
+  // loop: for (let i = 0; i < questionsArray.length; i++) {
   // render question card
   renderQuestion();
+
+  // verify answer
+  // if incorrect then deduct timer value }
+
   return;
 };
 
-// start quiz click event
+// startQuiz click event
 startButton.addEventListener("click", startQuiz);
+
+// select answer click event

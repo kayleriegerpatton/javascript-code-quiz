@@ -21,9 +21,6 @@ body {
   padding: 10px;
 }
 
-.header-item {
-}
-
 .header-item a {
   text-decoration: none;
   color: var(--purple);
@@ -33,16 +30,15 @@ body {
   margin-top: 0px;
 }
 
-#timer {
-}
-
 #start-container {
   max-width: 500px;
   margin: auto;
   padding: 0 40px;
 }
 
-.start-text {
+.start-text,
+#game-over,
+#game-over-text {
   text-align: center;
 }
 
@@ -64,7 +60,7 @@ body {
   background-color: var(--button-hover);
 }
 
-/* Question Cards */
+/* Question Cards Render */
 #question-text {
   text-align: center;
 }
@@ -89,6 +85,12 @@ body {
   color: #ffff;
   background-color: var(--purple);
   border-radius: 10%;
+}
+
+/* Game Over Render */
+#new-start-div {
+  display: flex;
+  justify-content: center;
 }
 
 /* High Scores Page */
