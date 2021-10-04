@@ -126,10 +126,14 @@ const renderGameOver = function () {
 
 const renderScoreForm = function () {
   // remove question card
-  // render HTML elements
+
+  //   remove header
+  headerContainer.remove();
+
   //   render submit button
   const formButton = document.createElement("button");
   formButton.setAttribute("class", "button");
+  formButton.setAttribute("id", "form-button");
   formButton.textContent = "Submit";
 
   // render input
@@ -172,7 +176,7 @@ const renderScoreForm = function () {
   //   append div to main
   mainContainer.appendChild(formDiv);
 
-  // get counter value to set score
+  // get counter value to set score?
   return;
 };
 
@@ -208,7 +212,7 @@ const startQuiz = function () {
 
   // loop: for (let i = 0; i < questionsArray.length; i++) {
   // render question card
-  renderScoreForm();
+  renderQuestion();
 
   // verify answer
   //   if incorrect then deduct timer value }

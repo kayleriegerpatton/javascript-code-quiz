@@ -97,6 +97,11 @@ body {
 #initials-form {
   max-width: 400px;
   margin: auto;
+  padding-top: 40px;
+}
+
+#form-button {
+  margin: 10px;
 }
 
 /* High Scores Page */
