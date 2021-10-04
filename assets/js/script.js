@@ -190,9 +190,6 @@ const renderScoreForm = function () {
 
   //   append div to main
   mainContainer.appendChild(formDiv);
-
-  // get counter value to set score?
-  return;
 };
 
 const registerScore = function () {
