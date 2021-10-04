@@ -48,6 +48,10 @@ const questionsArray = [
   },
 ];
 
+// declare questionContainer for removal by functions
+const questionContainer = document.createElement("div");
+questionContainer.setAttribute("id", "question-container");
+
 // TARGET HTML ELEMENTS
 const counterSpan = document.querySelector("#timer");
 const headerContainer = document.querySelector(".header-container");
@@ -55,9 +59,9 @@ const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
 
+// render question container elements
+// ***(working but without index increment)
 const renderQuestion = function () {
-  // increment question index, run function again passing the new index number
-
   // store current question
   let currentQuestion = questionsArray[questionIndex];
 
@@ -80,9 +84,8 @@ const renderQuestion = function () {
   questionText.setAttribute("id", "question-text");
   questionText.textContent = currentQuestion.question;
 
-  //   create question container div and append 2 children
-  const questionContainer = document.createElement("div");
-  questionContainer.setAttribute("id", "question-container");
+  //  append 2 children to questionContainer
+
   questionContainer.appendChild(questionText);
   questionContainer.appendChild(buttonContainer);
 
@@ -90,10 +93,12 @@ const renderQuestion = function () {
 };
 
 const verifyAnswer = function () {
+  // compare clicked button's array value to answer value
+  // use event handler?
   return;
 };
 
-// renderGameOver if counter === 0
+// renderGameOver if counter === 0 (*** Working)
 const renderGameOver = function () {
   questionContainer.remove();
 
@@ -118,23 +123,33 @@ const renderGameOver = function () {
   gameOverTitle.setAttribute("id", "game-over");
   gameOverTitle.textContent = "GAME OVER";
 
-  // append children to main container
-  mainContainer.appendChild(gameOverTitle);
-  mainContainer.appendChild(gameOverMessage);
-  mainContainer.appendChild(newStartDiv);
+  //   render gameOverContainer div, append 3 children
+  const gameOverContainer = document.createElement("div");
+  gameOverContainer.setAttribute("id", "game-over-container");
+  gameOverContainer.appendChild(gameOverTitle);
+  gameOverContainer.appendChild(gameOverMessage);
+  gameOverContainer.appendChild(newStartDiv);
+
+  // append container to main container
+  mainContainer.appendChild(gameOverContainer);
 };
 
+// renderScoreForm (*** Working)
 const renderScoreForm = function () {
-  // remove question card
-
-  //   remove header
+  //   remove question container and header
+  questionContainer.remove();
   headerContainer.remove();
+
+  // render anchor tag
+  const scoresLink = document.createElement("a");
+  scoresLink.setAttribute("href", "./highscores.html");
+  scoresLink.textContent = "Submit";
 
   //   render submit button
   const formButton = document.createElement("button");
   formButton.setAttribute("class", "button");
   formButton.setAttribute("id", "form-button");
-  formButton.textContent = "Submit";
+  formButton.appendChild(scoresLink);
 
   // render input
   const formInput = document.createElement("input");
@@ -183,10 +198,13 @@ const renderScoreForm = function () {
 const registerScore = function () {
   // add click event to submit button
   // prevent default form submission?
+  // store score value in local storage
+  // navigate to highscores.html
   return;
 };
 
 const renderHighScores = function () {
+  // pull and render scores list from local storage?
   return;
 };
 
@@ -195,7 +213,7 @@ const timerTick = function () {
   if (counter < 0) {
     console.log("BOOM");
     clearInterval(timer);
-    // renderGameOver();
+    renderGameOver();
   } else {
     counterSpan.textContent = counter;
     counter -= 1;
@@ -209,13 +227,25 @@ const timer = setInterval(timerTick, 1000);
 const startQuiz = function () {
   // remove div card
   startContainer.remove();
+  console.log("remove starting div");
 
-  // loop: for (let i = 0; i < questionsArray.length; i++) {
+  // loop: for (let questionIndex = 0; questionIndex < questionsArray.length; questionIndex++) {
   // render question card
   renderQuestion();
 
-  // verify answer
-  //   if incorrect then deduct timer value }
+  //   verifyAnswer();
+  //   if (){
+  //     // if ===  then increment questionIndex value
+  //     questionIndex++
+  //       //  remove previous question container div
+  //       questionContainer.remove();
+  //       renderQuestion();
+  //         // else deduct counter value
+  //   } else {
+  //       counter -= 5;
+  //   }
+
+  // if counter === 0 then renderGameOver
 
   // if answered all questions then:
   //   render score from counter value
@@ -223,6 +253,10 @@ const startQuiz = function () {
   //   render high scores page, pull from local storage
 
   return;
+};
+
+const restartQuiz = function () {
+  gameOverContainer.remove();
 };
 
 // startQuiz click event

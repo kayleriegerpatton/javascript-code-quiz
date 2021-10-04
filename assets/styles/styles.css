@@ -104,6 +104,11 @@ body {
   margin: 10px;
 }
 
+.button a {
+  color: #ffff;
+  text-decoration: none;
+}
+
 /* High Scores Page */
 #scores-container {
   max-width: 500px;
