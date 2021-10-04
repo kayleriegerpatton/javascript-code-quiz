@@ -158,7 +158,7 @@ const renderScoreForm = function () {
 
   // render p
   const scoreText = document.createElement("p");
-  scoreText.textContent = "Your final score is " + counter;
+  scoreText.textContent = "Your final score is " + counter + ".";
 
   // render h2
   const scoreTitle = document.createElement("h2");
