@@ -1,7 +1,7 @@
 // GLOBAL VARIABLES
 
 // set timer start value
-let counter = 3;
+let counter = 10;
 
 // set questions/answers array index number
 let questionIndex = 0;
@@ -54,14 +54,6 @@ const headerContainer = document.querySelector(".header-container");
 const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
-// const answerButton = document.querySelector("#answer1");
-// const buttonContainer = document.querySelector("#answer-buttons");
-// const questionText = document.querySelector("#question-text");
-// const questionContainer = document.querySelector("#question-container");
-// const newStartButton = document.querySelector("#new-start-button");
-// const newStartDiv = document.querySelector("#new-start-div");
-// const gameOverMessage = document.querySelector("#game-over-text");
-// const gameOverTitle = document.querySelector("#game-over");
 
 const renderQuestion = function () {
   // increment question index, run function again passing the new index number
@@ -132,11 +124,61 @@ const renderGameOver = function () {
   mainContainer.appendChild(newStartDiv);
 };
 
-const renderScore = function () {
+const renderScoreForm = function () {
+  // remove question card
+  // render HTML elements
+  //   render submit button
+  const formButton = document.createElement("button");
+  formButton.setAttribute("class", "button");
+  formButton.textContent = "Submit";
+
+  // render input
+  const formInput = document.createElement("input");
+  formInput.setAttribute("type", "text");
+  formInput.setAttribute("name", "initials");
+  formInput.setAttribute("id", "initials");
+
+  // render label
+  const formLabel = document.createElement("label");
+  formLabel.setAttribute("for", "initials");
+  formLabel.textContent = "Enter your initials: ";
+
+  //  render form
+  const form = document.createElement("form");
+  form.setAttribute("action", "");
+
+  // append 3 children to form
+  form.appendChild(formLabel);
+  form.appendChild(formInput);
+  form.appendChild(formButton);
+
+  // render p
+  const scoreText = document.createElement("p");
+  scoreText.textContent = "Your final score is " + counter;
+
+  // render h2
+  const scoreTitle = document.createElement("h2");
+  scoreTitle.textContent = "You beat the clock!";
+
+  // render div
+  const formDiv = document.createElement("div");
+  formDiv.setAttribute("id", "initials-form");
+
+  // append 3 children to div
+  formDiv.appendChild(scoreTitle);
+  formDiv.appendChild(scoreText);
+  formDiv.appendChild(form);
+
+  //   append div to main
+  mainContainer.appendChild(formDiv);
+
+  // get counter value to set score
   return;
 };
 
 const registerScore = function () {
+  // add click event to submit button
+  // prevent default form submission?
   return;
 };
 
@@ -166,7 +208,7 @@ const startQuiz = function () {
 
   // loop: for (let i = 0; i < questionsArray.length; i++) {
   // render question card
-  renderQuestion();
+  renderScoreForm();
 
   // verify answer
   //   if incorrect then deduct timer value }
@@ -185,4 +227,4 @@ startButton.addEventListener("click", startQuiz);
 // select answer click event
 
 // restart quiz click event
-mainContainer.addEventListener("click", startQuiz);
+// mainContainer.addEventListener("click", startQuiz);

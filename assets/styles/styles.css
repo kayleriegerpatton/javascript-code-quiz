@@ -93,6 +93,12 @@ body {
   justify-content: center;
 }
 
+/* Register Score Page Render */
+#initials-form {
+  max-width: 400px;
+  margin: auto;
+}
+
 /* High Scores Page */
 #scores-container {
   max-width: 500px;
