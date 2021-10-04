@@ -143,6 +143,7 @@ const renderScoreForm = function () {
   // render anchor tag
   const scoresLink = document.createElement("a");
   scoresLink.setAttribute("href", "./highscores.html");
+  scoresLink.setAttribute("id", "form-submit");
   scoresLink.textContent = "Submit";
 
   //   render submit button
@@ -193,10 +194,13 @@ const renderScoreForm = function () {
 };
 
 const registerScore = function () {
-  // add click event to submit button
+  // check for click on container and check event target
+  document.mainContainer.addEventListener("click", function (event) {
+    if (event.target.id == "form-submit") {
+    }
+  });
   // prevent default form submission?
   // store score value in local storage
-  // navigate to highscores.html
   return;
 };
 
@@ -222,9 +226,8 @@ const timer = setInterval(timerTick, 1000);
 
 // start quiz
 const startQuiz = function () {
-  // remove div card
+  // remove starting div
   startContainer.remove();
-  console.log("remove starting div");
 
   // loop: for (let questionIndex = 0; questionIndex < questionsArray.length; questionIndex++) {
   // render question card
@@ -260,6 +263,8 @@ const restartQuiz = function () {
 startButton.addEventListener("click", startQuiz);
 
 // select answer click event
+
+// submit/store score click event
 
 // restart quiz click event
 // mainContainer.addEventListener("click", startQuiz);
