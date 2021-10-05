@@ -102,23 +102,27 @@ const verifyAnswer = function (event) {
   ) {
     console.log("correct answer clicked");
     //   if true then increment questionIndex value and remove question container
-    questionIndex++;
+    // let questionIndex = questionIndex + 1;
     questionContainer.remove();
   } else {
     counter -= 5;
   }
-  return questionIndex;
 };
 
 // renderGameOver if counter === 0 (*** Working)
 const renderGameOver = function () {
   questionContainer.remove();
 
-  //   render new start button
+  // render link to start
+  const newStartLink = document.createElement("a");
+  newStartLink.setAttribute("href", "./index.html");
+  newStartLink.textContent = "Start Quiz";
+
+  //   render new start button, append anchor
   const newStartButton = document.createElement("button");
   newStartButton.setAttribute("id", "new-start-button");
   newStartButton.setAttribute("class", "button");
-  newStartButton.textContent = "Start Quiz";
+  newStartButton.appendChild(newStartLink);
 
   // render button div, append child button
   const newStartDiv = document.createElement("div");
@@ -249,15 +253,11 @@ const runQuiz = function () {
     questionIndex++
   ) {
     // display question
-    renderQuestion(questionIndex);
+    renderQuestion();
 
     // verify answer
     verifyAnswer();
   }
-};
-
-const restartQuiz = function () {
-  gameOverContainer.remove();
 };
 
 // startQuiz click event
@@ -267,6 +267,3 @@ startButton.addEventListener("click", startQuiz);
 questionContainer.addEventListener("click", verifyAnswer);
 
 // submit/store score click event
-
-// restart quiz click event
-// mainContainer.addEventListener("click", startQuiz);
