@@ -3,8 +3,8 @@
 // set timer start value
 let counter = 30;
 
-// set questions/answers array index number
-let questionIndex = 1;
+// set questions array index number
+let questionIndex = 0;
 
 // declare questions/answers array
 const questionsArray = [
@@ -63,7 +63,7 @@ const questionContainer = document.createElement("div");
 questionContainer.setAttribute("id", "question-container");
 
 // render question container
-// ***(working but without index increment)
+// ***(working but without index increment loop)
 const renderQuestion = function () {
   //   create buttons div
   const buttonContainer = document.createElement("div");
@@ -92,7 +92,7 @@ const renderQuestion = function () {
 };
 
 const verifyAnswer = function (event) {
-  const currentTarget = event.currentTarget;
+  //   const currentTarget = event.currentTarget;
   const target = event.target;
 
   //   check if click is on the correct answer button
@@ -101,10 +101,9 @@ const verifyAnswer = function (event) {
     currentQuestion.answers[target.id] === currentQuestion.correctAnswer
   ) {
     console.log("correct answer clicked");
-    //   if true then increment questionIndex value, remove question container, and render next question
+    //   if true then increment questionIndex value and remove question container
     questionIndex++;
     questionContainer.remove();
-    renderQuestion();
   } else {
     counter -= 5;
   }
@@ -221,11 +220,9 @@ const renderHighScores = function () {
   // pull and render scores list from local storage?
   return;
 };
-
-// set timer & display function
+// set timer & display
 const timerTick = function () {
   if (counter < 0) {
-    console.log("BOOM");
     clearInterval(timer);
     renderGameOver();
   } else {
@@ -234,13 +231,14 @@ const timerTick = function () {
   }
 };
 
-// timer interval
-const timer = setInterval(timerTick, 1000);
-
 // start quiz
 const startQuiz = function () {
   // remove starting div
   startContainer.remove();
+
+  // timer
+  const timer = setInterval(timerTick, 1000);
+
   runQuiz();
 };
 
