@@ -1,7 +1,7 @@
 // GLOBAL VARIABLES
 
 // set timer start value
-let counter = 10;
+let counter = 30;
 
 // set questions/answers array index number
 let questionIndex = 0;
@@ -48,18 +48,18 @@ const questionsArray = [
   },
 ];
 
-// declare questionContainer for removal by functions
-const questionContainer = document.createElement("div");
-questionContainer.setAttribute("id", "question-container");
-
-// TARGET HTML ELEMENTS
+// TARGET STATIC HTML ELEMENTS
 const counterSpan = document.querySelector("#timer");
 const headerContainer = document.querySelector(".header-container");
 const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
 
-// render question container elements
+// target questionContainer for removal and click events
+const questionContainer = document.createElement("div");
+questionContainer.setAttribute("id", "question-container");
+
+// render question container
 // ***(working but without index increment)
 const renderQuestion = function () {
   // store current question
@@ -92,7 +92,14 @@ const renderQuestion = function () {
   mainContainer.appendChild(questionContainer);
 };
 
-const verifyAnswer = function () {
+const verifyAnswer = function (event) {
+  const currentTarget = event.currentTarget;
+  const target = event.target;
+
+  //   check if click is on button
+  if (target.getAttribute("class") === "answerButton") {
+    console.log("button clicked");
+  }
   // compare clicked button's array value to answer value
   // use event handler?
   return;
@@ -262,7 +269,8 @@ const restartQuiz = function () {
 // startQuiz click event
 startButton.addEventListener("click", startQuiz);
 
-// select answer click event
+// verify answer click event
+questionContainer.addEventListener("click", verifyAnswer);
 
 // submit/store score click event
 
