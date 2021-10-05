@@ -210,13 +210,8 @@ const renderScoreForm = function () {
 };
 
 const registerScore = function () {
-  // check for click on container and check event target
-  document.mainContainer.addEventListener("click", function (event) {
-    if (event.target.id == "form-submit") {
-    }
-  });
+  // check for click on button and store form input data to local storage
   // prevent default form submission?
-  // store score value in local storage
   return;
 };
 
