@@ -4,14 +4,14 @@
 let counter = 30;
 
 // set questions/answers array index number
-let questionIndex = 0;
+let questionIndex = 1;
 
 // declare questions/answers array
 const questionsArray = [
   {
     question: "What tag is used to link a JavaScript file to an HTML file?",
     answers: ["a. <link>", "b. <script>", "c. <append>"],
-    correctAnswer: "<script>",
+    correctAnswer: "b. <script>",
   },
   {
     question: "What syntax accesses an object method?",
@@ -20,12 +20,12 @@ const questionsArray = [
       "b. methodName.objectName()",
       "c. objectName.methodName()",
     ],
-    correctAnswer: "objectName.methodName",
+    correctAnswer: "c. objectName.methodName()",
   },
   {
     question: "Which is not a primitive type in JavaScript?",
     answers: ["a. number", "b. boolean", "c. operator"],
-    correctAnswer: "operator",
+    correctAnswer: "c. operator",
   },
   {
     question: "What does the .stopPropagation() method do?",
@@ -34,7 +34,7 @@ const questionsArray = [
       "b. prevents event default actions",
       "c. prevents JS from creating HTML elements",
     ],
-    correctAnswer: "prevents event bubbling",
+    correctAnswer: "a. prevents event bubbling",
   },
   {
     question:
@@ -44,9 +44,12 @@ const questionsArray = [
       "b. stringify the values",
       "c. push values into an array",
     ],
-    correctAnswer: "parse the string values",
+    correctAnswer: "a. parse the string values",
   },
 ];
+
+// store current question
+let currentQuestion = questionsArray[questionIndex];
 
 // TARGET STATIC HTML ELEMENTS
 const counterSpan = document.querySelector("#timer");
@@ -62,9 +65,6 @@ questionContainer.setAttribute("id", "question-container");
 // render question container
 // ***(working but without index increment)
 const renderQuestion = function () {
-  // store current question
-  let currentQuestion = questionsArray[questionIndex];
-
   //   create buttons div
   const buttonContainer = document.createElement("div");
   buttonContainer.setAttribute("id", "answer-buttons");
@@ -85,7 +85,6 @@ const renderQuestion = function () {
   questionText.textContent = currentQuestion.question;
 
   //  append 2 children to questionContainer
-
   questionContainer.appendChild(questionText);
   questionContainer.appendChild(buttonContainer);
 
@@ -96,13 +95,20 @@ const verifyAnswer = function (event) {
   const currentTarget = event.currentTarget;
   const target = event.target;
 
-  //   check if click is on button
-  if (target.getAttribute("class") === "answerButton") {
-    console.log("button clicked");
+  //   check if click is on the correct answer button
+  if (
+    target.getAttribute("class") === "answerButton" &&
+    currentQuestion.answers[target.id] === currentQuestion.correctAnswer
+  ) {
+    console.log("correct answer clicked");
+    //   if true then increment questionIndex value, remove question container, and render next question
+    questionIndex++;
+    questionContainer.remove();
+    renderQuestion();
+  } else {
+    counter -= 5;
   }
-  // compare clicked button's array value to answer value
-  // use event handler?
-  return;
+  return questionIndex;
 };
 
 // renderGameOver if counter === 0 (*** Working)
@@ -235,31 +241,21 @@ const timer = setInterval(timerTick, 1000);
 const startQuiz = function () {
   // remove starting div
   startContainer.remove();
+  runQuiz();
+};
 
-  // loop: for (let questionIndex = 0; questionIndex < questionsArray.length; questionIndex++) {
-  // render question card
-  renderQuestion();
+const runQuiz = function () {
+  for (
+    let questionIndex = 0;
+    questionIndex < questionsArray.length;
+    questionIndex++
+  ) {
+    // display question
+    renderQuestion(questionIndex);
 
-  //   verifyAnswer();
-  //   if (){
-  //     // if ===  then increment questionIndex value
-  //     questionIndex++
-  //       //  remove previous question container div
-  //       questionContainer.remove();
-  //       renderQuestion();
-  //         // else deduct counter value
-  //   } else {
-  //       counter -= 5;
-  //   }
-
-  // if counter === 0 then renderGameOver
-
-  // if answered all questions then:
-  //   render score from counter value
-  //   register score to local storage
-  //   render high scores page, pull from local storage
-
-  return;
+    // verify answer
+    verifyAnswer();
+  }
 };
 
 const restartQuiz = function () {

@@ -70,13 +70,14 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 400px;
+  margin: auto;
 }
 
 #answer-buttons {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  max-width: 400px;
 }
 
 .answerButton {
@@ -85,6 +86,7 @@ body {
   color: #ffff;
   background-color: var(--purple);
   border-radius: 10%;
+  text-align: left;
 }
 
 /* Game Over Render */
