@@ -57,14 +57,19 @@ const headerContainer = document.querySelector(".header-container");
 const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
-
-// target questionContainer for removal and click events
-const questionContainer = document.createElement("div");
-questionContainer.setAttribute("id", "question-container");
+// high scores html
+const clearScores = document.querySelector("#clear-scores");
 
 // render question container
-// ***(working but without index increment loop)
 const renderQuestion = function () {
+  // get question
+  const question = questionsArray[questionIndex];
+
+  // target questionContainer for removal and click events
+  const questionContainer = document.createElement("div");
+  questionContainer.setAttribute("id", "question-container");
+  questionContainer.setAttribute("data-answer", question.correctAnswer);
+
   //   create buttons div
   const buttonContainer = document.createElement("div");
   buttonContainer.setAttribute("id", "answer-buttons");
@@ -74,10 +79,13 @@ const renderQuestion = function () {
     const answerButton = document.createElement("button");
     answerButton.setAttribute("class", "answerButton");
     answerButton.setAttribute("id", index);
+    answerButton.setAttribute("data-option", eachAnswer);
     answerButton.textContent = eachAnswer;
     buttonContainer.appendChild(answerButton);
   };
-  currentQuestion.answers.forEach(renderAnswers);
+
+  question.answers.forEach(renderAnswers);
+  currentQuestion = questionsArray[questionIndex];
 
   //   create question text
   const questionText = document.createElement("h2");
@@ -88,30 +96,41 @@ const renderQuestion = function () {
   questionContainer.appendChild(questionText);
   questionContainer.appendChild(buttonContainer);
 
+  // verify answer click event
+  questionContainer.addEventListener("click", verifyAnswer);
+
   mainContainer.appendChild(questionContainer);
 };
 
 const verifyAnswer = function (event) {
-  //   const currentTarget = event.currentTarget;
+  const currentTarget = event.currentTarget;
   const target = event.target;
 
+  const userClicked = target.getAttribute("data-option");
+  console.log(userClicked);
+
+  const correctAnswer = currentTarget.getAttribute("data-answer");
+  console.log(correctAnswer);
+
   //   check if click is on the correct answer button
-  if (
-    target.getAttribute("class") === "answerButton" &&
-    currentQuestion.answers[target.id] === currentQuestion.correctAnswer
-  ) {
+  if (userClicked === correctAnswer) {
     console.log("correct answer clicked");
     //   if true then increment questionIndex value and remove question container
-    // let questionIndex += 1;
-    questionContainer.remove();
+    questionIndex += 1;
+    document.getElementById("question-container").remove();
+    if (questionIndex > questionsArray.length) {
+      renderScoreForm();
+    }
+    renderQuestion();
   } else {
+    console.log("incorrect answer");
     counter -= 5;
   }
 };
 
 // renderGameOver if counter === 0 (*** Working)
 const renderGameOver = function () {
-  questionContainer.remove();
+  document.getElementById("question-container").remove();
 
   // render link to start
   const newStartLink = document.createElement("a");
@@ -153,8 +172,7 @@ const renderGameOver = function () {
 // renderScoreForm (*** Working)
 const renderScoreForm = function () {
   //   remove question container and header
-  questionContainer.remove();
-  headerContainer.remove();
+  document.getElementById("question-container").remove();
 
   // render anchor tag
   const scoresLink = document.createElement("a");
@@ -211,41 +229,50 @@ const renderScoreForm = function () {
 
 const registerScore = function () {
   // check for click on button and store form input data to local storage
-  // prevent default form submission?
+  // prevent default form submission
   return;
 };
 
 const renderHighScores = function () {
-  // pull and render scores list from local storage?
+  // pull and render scores list from local storage
   return;
 };
-// set timer & display (*** Working)
-const timerTick = function () {
-  if (counter === 0) {
-    renderGameOver();
-  }
-  if (counter < 0) {
-    clearInterval(timer);
-  } else {
-    counterSpan.textContent = counter;
-    counter -= 1;
-  }
+
+// clear high scores from local storage and page
+const clearHighScores = function () {
+  console.log("clear scores");
+};
+
+const startTimer = function () {
+  // set timer & display (*** Working)
+  const timerTick = function () {
+    if (counter === 0) {
+      renderGameOver();
+    }
+    if (counter < 0) {
+      clearInterval(timer);
+    } else {
+      counterSpan.textContent = counter;
+      counter -= 1;
+    }
+  };
+  // timer
+  const timer = setInterval(timerTick, 1000);
 };
 
 // start quiz
 const startQuiz = function () {
   // remove starting div
   startContainer.remove();
-
-  // timer
-  const timer = setInterval(timerTick, 1000);
-
-  runQuiz();
+  startTimer();
+  //   runQuiz();
+  renderQuestion();
 };
 
 const runQuiz = function () {
   for (let i = 0; i < questionsArray.length; i++) {
     // display question
+    console.log("loop worked");
     renderQuestion();
 
     // verify answer
@@ -256,7 +283,8 @@ const runQuiz = function () {
 // startQuiz click event
 startButton.addEventListener("click", startQuiz);
 
-// verify answer click event
-questionContainer.addEventListener("click", verifyAnswer);
-
 // submit/store score click event
+// .addEventListener("click", );
+
+// clear scores click event
+// clearScores.addEventListener("click", clearHighScores);
