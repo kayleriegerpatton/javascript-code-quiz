@@ -1,11 +1,5 @@
 // GLOBAL VARIABLES
 
-// set timer start value
-let counter = 30;
-
-// set questions array index number
-let questionIndex = 0;
-
 // declare questions/answers array
 const questionsArray = [
   {
@@ -47,6 +41,12 @@ const questionsArray = [
     correctAnswer: "a. parse the string values",
   },
 ];
+
+// set timer start value
+let counter = 5;
+
+// set questions array index number
+let questionIndex = 0;
 
 // store current question
 let currentQuestion = questionsArray[questionIndex];
@@ -102,6 +102,8 @@ const renderQuestion = function () {
   mainContainer.appendChild(questionContainer);
 };
 
+let isGameCompleted = false;
+
 const verifyAnswer = function (event) {
   const currentTarget = event.currentTarget;
   const target = event.target;
@@ -112,25 +114,40 @@ const verifyAnswer = function (event) {
   const correctAnswer = currentTarget.getAttribute("data-answer");
   console.log(correctAnswer);
 
+  if (questionIndex === questionsArray.length - 1) {
+    isGameCompleted = true;
+    renderScoreForm();
+    return;
+  }
+
   //   check if click is on the correct answer button
   if (userClicked === correctAnswer) {
-    console.log("correct answer clicked");
     //   if true then increment questionIndex value and remove question container
-    questionIndex += 1;
-    document.getElementById("question-container").remove();
-    if (questionIndex > questionsArray.length) {
-      renderScoreForm();
+    if (questionIndex <= questionsArray.length - 1) {
+      removeQuestion();
+      questionIndex += 1;
+      renderQuestion();
     }
-    renderQuestion();
+    // renderScoreForm();
   } else {
-    console.log("incorrect answer");
     counter -= 5;
   }
 };
 
+// const endGame = function (){
+//     if (){
+
+//     }
+// }
+
+// remove question container
+const removeQuestion = function () {
+  document.getElementById("question-container").remove();
+};
+
 // renderGameOver if counter === 0 (*** Working)
 const renderGameOver = function () {
-  document.getElementById("question-container").remove();
+  removeQuestion();
 
   // render link to start
   const newStartLink = document.createElement("a");
@@ -171,60 +188,62 @@ const renderGameOver = function () {
 
 // renderScoreForm (*** Working)
 const renderScoreForm = function () {
-  //   remove question container and header
-  document.getElementById("question-container").remove();
+  if (isGameCompleted) {
+    //   remove question container
+    removeQuestion();
 
-  // render anchor tag
-  const scoresLink = document.createElement("a");
-  scoresLink.setAttribute("href", "./highscores.html");
-  scoresLink.setAttribute("id", "form-submit");
-  scoresLink.textContent = "Submit";
+    // render anchor tag
+    const scoresLink = document.createElement("a");
+    scoresLink.setAttribute("href", "./highscores.html");
+    scoresLink.setAttribute("id", "form-submit");
+    scoresLink.textContent = "Submit";
 
-  //   render submit button
-  const formButton = document.createElement("button");
-  formButton.setAttribute("class", "button");
-  formButton.setAttribute("id", "form-button");
-  formButton.appendChild(scoresLink);
+    //   render submit button
+    const formButton = document.createElement("button");
+    formButton.setAttribute("class", "button");
+    formButton.setAttribute("id", "form-button");
+    formButton.appendChild(scoresLink);
 
-  // render input
-  const formInput = document.createElement("input");
-  formInput.setAttribute("type", "text");
-  formInput.setAttribute("name", "initials");
-  formInput.setAttribute("id", "initials");
+    // render input
+    const formInput = document.createElement("input");
+    formInput.setAttribute("type", "text");
+    formInput.setAttribute("name", "initials");
+    formInput.setAttribute("id", "initials");
 
-  // render label
-  const formLabel = document.createElement("label");
-  formLabel.setAttribute("for", "initials");
-  formLabel.textContent = "Enter your initials: ";
+    // render label
+    const formLabel = document.createElement("label");
+    formLabel.setAttribute("for", "initials");
+    formLabel.textContent = "Enter your initials: ";
 
-  //  render form
-  const form = document.createElement("form");
-  form.setAttribute("action", "");
+    //  render form
+    const form = document.createElement("form");
+    form.setAttribute("action", "");
 
-  // append 3 children to form
-  form.appendChild(formLabel);
-  form.appendChild(formInput);
-  form.appendChild(formButton);
+    // append 3 children to form
+    form.appendChild(formLabel);
+    form.appendChild(formInput);
+    form.appendChild(formButton);
 
-  // render p
-  const scoreText = document.createElement("p");
-  scoreText.textContent = "Your final score is " + counter + ".";
+    // render p
+    const scoreText = document.createElement("p");
+    scoreText.textContent = "Your final score is " + counter + ".";
 
-  // render h2
-  const scoreTitle = document.createElement("h2");
-  scoreTitle.textContent = "You beat the clock!";
+    // render h2
+    const scoreTitle = document.createElement("h2");
+    scoreTitle.textContent = "You beat the clock!";
 
-  // render div
-  const formDiv = document.createElement("div");
-  formDiv.setAttribute("id", "initials-form");
+    // render div
+    const formDiv = document.createElement("div");
+    formDiv.setAttribute("id", "initials-form");
 
-  // append 3 children to div
-  formDiv.appendChild(scoreTitle);
-  formDiv.appendChild(scoreText);
-  formDiv.appendChild(form);
+    // append 3 children to div
+    formDiv.appendChild(scoreTitle);
+    formDiv.appendChild(scoreText);
+    formDiv.appendChild(form);
 
-  //   append div to main
-  mainContainer.appendChild(formDiv);
+    //   append div to main
+    mainContainer.appendChild(formDiv);
+  }
 };
 
 const registerScore = function () {
@@ -244,18 +263,22 @@ const clearHighScores = function () {
 };
 
 const startTimer = function () {
-  // set timer & display (*** Working)
+  // set timer & display
   const timerTick = function () {
-    if (counter === 0) {
+    if (counter === 0 && !isGameCompleted) {
       renderGameOver();
     }
-    if (counter < 0) {
+
+    if (counter === 0 || isGameCompleted) {
       clearInterval(timer);
-    } else {
-      counterSpan.textContent = counter;
+    }
+
+    if (counter > 0 && !isGameCompleted) {
       counter -= 1;
+      counterSpan.textContent = counter;
     }
   };
+
   // timer
   const timer = setInterval(timerTick, 1000);
 };
@@ -265,7 +288,6 @@ const startQuiz = function () {
   // remove starting div
   startContainer.remove();
   startTimer();
-  //   runQuiz();
   renderQuestion();
 };
 
