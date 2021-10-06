@@ -69,7 +69,7 @@ const renderQuestion = function () {
   const buttonContainer = document.createElement("div");
   buttonContainer.setAttribute("id", "answer-buttons");
 
-  //   create answer buttons and append
+  //   create answer buttons and append with for each
   const renderAnswers = function (eachAnswer, index) {
     const answerButton = document.createElement("button");
     answerButton.setAttribute("class", "answerButton");
@@ -102,7 +102,7 @@ const verifyAnswer = function (event) {
   ) {
     console.log("correct answer clicked");
     //   if true then increment questionIndex value and remove question container
-    // let questionIndex = questionIndex + 1;
+    // let questionIndex += 1;
     questionContainer.remove();
   } else {
     counter -= 5;
@@ -219,11 +219,13 @@ const renderHighScores = function () {
   // pull and render scores list from local storage?
   return;
 };
-// set timer & display
+// set timer & display (*** Working)
 const timerTick = function () {
+  if (counter === 0) {
+    renderGameOver();
+  }
   if (counter < 0) {
     clearInterval(timer);
-    renderGameOver();
   } else {
     counterSpan.textContent = counter;
     counter -= 1;
@@ -242,11 +244,7 @@ const startQuiz = function () {
 };
 
 const runQuiz = function () {
-  for (
-    let questionIndex = 0;
-    questionIndex < questionsArray.length;
-    questionIndex++
-  ) {
+  for (let i = 0; i < questionsArray.length; i++) {
     // display question
     renderQuestion();
 
