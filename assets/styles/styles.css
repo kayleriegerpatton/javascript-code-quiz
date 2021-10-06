@@ -119,3 +119,11 @@ body {
   padding-left: 40px;
   padding-right: 40px;
 }
+
+.high-scores-list {
+  background-color: var(--field-background);
+}
+
+.scores-list-item {
+  padding: 5px;
+}
