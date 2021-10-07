@@ -1,6 +1,6 @@
 // GLOBAL VARIABLES
 
-// declare questions/answers array
+// questions/answers array
 const questionsArray = [
   {
     question: "What tag is used to link a JavaScript file to an HTML file?",
@@ -42,13 +42,15 @@ const questionsArray = [
   },
 ];
 
+let isGameCompleted = false;
+
 // set timer start value
 let counter = 5;
 
 // set questions array index number
 let questionIndex = 0;
 
-// store current question
+// store current question value
 let currentQuestion = questionsArray[questionIndex];
 
 // TARGET STATIC HTML ELEMENTS
@@ -58,7 +60,7 @@ const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
 // high scores html
-const clearScores = document.querySelector("#clear-scores");
+const clearScoresBtn = document.querySelector("#clear-scores");
 
 // render question container
 const renderQuestion = function () {
@@ -101,8 +103,6 @@ const renderQuestion = function () {
 
   mainContainer.appendChild(questionContainer);
 };
-
-let isGameCompleted = false;
 
 const verifyAnswer = function (event) {
   const currentTarget = event.currentTarget;
@@ -181,7 +181,7 @@ const renderGameOver = function () {
   mainContainer.appendChild(gameOverContainer);
 };
 
-// renderScoreForm (*** Working)
+// renderScoreForm
 const renderScoreForm = function () {
   if (isGameCompleted) {
     //   remove question container
@@ -198,6 +198,9 @@ const renderScoreForm = function () {
     formButton.setAttribute("class", "button");
     formButton.setAttribute("id", "form-button");
     formButton.appendChild(scoresLink);
+
+    // set submit score click event listener
+    formButton.addEventListener("click", submitScore);
 
     // render input
     const formInput = document.createElement("input");
@@ -236,22 +239,21 @@ const renderScoreForm = function () {
     formDiv.appendChild(scoreText);
     formDiv.appendChild(form);
 
-    // submit score click event
-    // .addEventListener("click", );
-
     //   append div to main
     mainContainer.appendChild(formDiv);
   }
 };
 
-const registerScore = function () {
-  // check for click on button and store form input data to local storage
+const submitScore = function (event) {
   // prevent default form submission
+  event.stopPropagation();
+
+  // set initials and score to LS
   return;
 };
 
 const renderHighScores = function () {
-  // pull and render scores list from local storage
+  // get scores & initials from LS
   return;
 };
 
@@ -293,8 +295,8 @@ const startQuiz = function () {
 // startQuiz click event
 startButton.addEventListener("click", startQuiz);
 
-// submit/store score click event
-// .addEventListener("click", );
-
 // clear scores click event
-// clearScores.addEventListener("click", clearHighScores);
+// clearScoresBtn.addEventListener("click", clearHighScores);
+
+// set register score click event
+//   .addEventListener("click", submitScore);
