@@ -1,4 +1,4 @@
-# javascript-code-quiz
+# Javascript Code Quiz
 
 A timed, multiple-choice Javascript fundamentals quiz that stores high scores.
 

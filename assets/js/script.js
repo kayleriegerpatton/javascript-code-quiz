@@ -122,31 +122,26 @@ const verifyAnswer = function (event) {
 
   //   check if click is on the correct answer button
   if (userClicked === correctAnswer) {
-    //   if true then increment questionIndex value and remove question container
+    //   if true then increment questionIndex value
     if (questionIndex <= questionsArray.length - 1) {
       removeQuestion();
       questionIndex += 1;
       renderQuestion();
     }
-    // renderScoreForm();
+    // deduct time
   } else {
     counter -= 5;
   }
 };
-
-// const endGame = function (){
-//     if (){
-
-//     }
-// }
 
 // remove question container
 const removeQuestion = function () {
   document.getElementById("question-container").remove();
 };
 
-// renderGameOver if counter === 0 (*** Working)
+// renderGameOver
 const renderGameOver = function () {
+  counterSpan.textContent = 0;
   removeQuestion();
 
   // render link to start
@@ -241,6 +236,9 @@ const renderScoreForm = function () {
     formDiv.appendChild(scoreText);
     formDiv.appendChild(form);
 
+    // submit score click event
+    // .addEventListener("click", );
+
     //   append div to main
     mainContainer.appendChild(formDiv);
   }
@@ -265,7 +263,8 @@ const clearHighScores = function () {
 const startTimer = function () {
   // set timer & display
   const timerTick = function () {
-    if (counter === 0 && !isGameCompleted) {
+    if (counter <= 0 && !isGameCompleted) {
+      clearInterval(timer);
       renderGameOver();
     }
 
@@ -289,17 +288,6 @@ const startQuiz = function () {
   startContainer.remove();
   startTimer();
   renderQuestion();
-};
-
-const runQuiz = function () {
-  for (let i = 0; i < questionsArray.length; i++) {
-    // display question
-    console.log("loop worked");
-    renderQuestion();
-
-    // verify answer
-    verifyAnswer();
-  }
 };
 
 // startQuiz click event
