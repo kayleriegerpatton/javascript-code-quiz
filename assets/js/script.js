@@ -61,6 +61,7 @@ const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
 // high scores html
 const clearScoresBtn = document.querySelector("#clear-scores");
+const highScoresList = document.querySelector("#high-scores-list");
 
 // render question container
 const renderQuestion = function () {
@@ -242,27 +243,42 @@ const renderScoreForm = function () {
   }
 };
 
-const winnerInitials = toUpperCase("kjrp");
+const submitScore = function () {
+  // get input value (initials)
+  let winnerInitials = document.querySelector("#initials").value;
 
-const submitScore = function (event) {
-  // prevent default form submission
-  event.stopPropagation();
+  let endScore = counter;
 
-  //   get initials from LS
+  //   get initials and score from LS
   const initialsFromLS = JSON.parse(localStorage.getItem("initials"));
-  //   if empty then set empty array for initials in LS
+  const scoreFromLS = JSON.parse(localStorage.getItem("score"));
+
+  //   if empty, set arrays for initials and score in LS
   if (!initialsFromLS) {
     // set into LS
-    localStorage.setItem("initials", JSON.stringify([]));
+    localStorage.setItem("initials", JSON.stringify([winnerInitials]));
   } else {
-    // set initials input and counter value to LS
-    // const initialsArray = JSON.parse(initialsFromLS);
-    // initialsArray.push(winnerInitials);
+    // set initials input to LS
     initialsFromLS.push(winnerInitials);
     localStorage.setItem("initials", JSON.stringify(initialsFromLS));
   }
 
-  const createScoresList = function (eachInitials, initialsIndex) {};
+  if (!scoreFromLS) {
+    // set into LS
+    localStorage.setItem("score", JSON.stringify([endScore]));
+  } else {
+    // set score value to LS
+    scoreFromLS.push(endScore);
+    localStorage.setItem("score", JSON.stringify(scoreFromLS));
+  }
+
+  const createScoresList = function (eachInitials, initialsIndex) {
+    const scoreListItem = document.createElement("li");
+    scoreListItem.setAttribute("class", "scores-list-item");
+    scoreListItem.textContent = eachInitials;
+
+    highScoresList.appendChild(scoreListItem);
+  };
 
   //   insert forEach on initialsFromLS
   initialsFromLS.forEach(createScoresList());
@@ -286,9 +302,6 @@ const clearHighScores = function () {
 
   //   remove scores from page
 };
-
-// clear scores click event
-clearScoresBtn.addEventListener("click", clearHighScores);
 
 const startTimer = function () {
   // set timer & display
@@ -321,3 +334,6 @@ const startQuiz = function () {
 
 // startQuiz click event
 startButton.addEventListener("click", startQuiz);
+
+// clear scores click event
+// clearScoresBtn.addEventListener("click", clearHighScores);
