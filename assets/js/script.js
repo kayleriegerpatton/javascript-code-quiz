@@ -244,23 +244,49 @@ const renderScoreForm = function () {
   }
 };
 
+const winnerInitials = "KJRP";
+
 const submitScore = function (event) {
   // prevent default form submission
   event.stopPropagation();
 
-  // set initials and score to LS
+  //   get from LS
+  const initialsFromLS = localStorage.getItem("initials");
+  //   if empty then set empty array in LS
+  if (!initialsFromLS) {
+    const initials = [winnerInitials];
+
+    // set into LS
+    localStorage.setItem("initials", JSON.stringify(initials));
+  } else {
+    // set initials input and counter value to LS
+    const initialsArray = JSON.parse(initialsFromLS);
+    initialsArray.push(winnerInitials);
+    localStorage.setItem("initials", JSON.stringify(initialsArray));
+  }
+
   return;
 };
 
 const renderHighScores = function () {
   // get scores & initials from LS
+  //   print to page
   return;
 };
 
 // clear high scores from local storage and page
 const clearHighScores = function () {
   console.log("clear scores");
+
+  //   clear local storage
+  //   event.preventDefault();
+  //   localStorage.clear();
+
+  //   remove scores from page
 };
+
+// clear scores click event
+clearScoresBtn.addEventListener("click", clearHighScores);
 
 const startTimer = function () {
   // set timer & display
@@ -286,7 +312,6 @@ const startTimer = function () {
 
 // start quiz
 const startQuiz = function () {
-  // remove starting div
   startContainer.remove();
   startTimer();
   renderQuestion();
@@ -294,9 +319,3 @@ const startQuiz = function () {
 
 // startQuiz click event
 startButton.addEventListener("click", startQuiz);
-
-// clear scores click event
-// clearScoresBtn.addEventListener("click", clearHighScores);
-
-// set register score click event
-//   .addEventListener("click", submitScore);

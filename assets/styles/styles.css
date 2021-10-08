@@ -120,7 +120,7 @@ body {
   padding-right: 40px;
 }
 
-.high-scores-list {
+#high-scores-list {
   background-color: var(--field-background);
 }
 
