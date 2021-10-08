@@ -243,47 +243,51 @@ const renderScoreForm = function () {
   }
 };
 
+// construct high scores list
+const renderScoresList = function (initialsFromLS) {
+  const createScoresList = function (eachInitials, initialsIndex) {
+    const scoreListItem = document.createElement("li");
+    scoreListItem.setAttribute("class", "scores-list-item");
+    scoreListItem.textContent = eachInitials;
+    highScoresList.appendChild(scoreListItem);
+  };
+  highScoresList.innerHTML = "";
+  //   insert forEach on initialsFromLS
+  initialsFromLS.forEach(createScoresList);
+};
+
 const submitScore = function () {
   // get input value (initials)
   let winnerInitials = document.querySelector("#initials").value;
 
-  let endScore = counter;
+  // get score value from counter
+  // let endScore = counter;
 
   //   get initials and score from LS
   const initialsFromLS = JSON.parse(localStorage.getItem("initials"));
-  const scoreFromLS = JSON.parse(localStorage.getItem("score"));
+  // const scoreFromLS = JSON.parse(localStorage.getItem("score"));
 
   //   if empty, set arrays for initials and score in LS
   if (!initialsFromLS) {
     // set into LS
     localStorage.setItem("initials", JSON.stringify([winnerInitials]));
+    renderScoresList(winnerInitials);
   } else {
     // set initials input to LS
     initialsFromLS.push(winnerInitials);
     localStorage.setItem("initials", JSON.stringify(initialsFromLS));
+
+    renderScoresList(initialsFromLS);
   }
 
-  if (!scoreFromLS) {
-    // set into LS
-    localStorage.setItem("score", JSON.stringify([endScore]));
-  } else {
-    // set score value to LS
-    scoreFromLS.push(endScore);
-    localStorage.setItem("score", JSON.stringify(scoreFromLS));
-  }
-
-  const createScoresList = function (eachInitials, initialsIndex) {
-    const scoreListItem = document.createElement("li");
-    scoreListItem.setAttribute("class", "scores-list-item");
-    scoreListItem.textContent = eachInitials;
-
-    highScoresList.appendChild(scoreListItem);
-  };
-
-  //   insert forEach on initialsFromLS
-  initialsFromLS.forEach(createScoresList());
-
-  return;
+  // if (!scoreFromLS) {
+  //   // set into LS
+  //   localStorage.setItem("score", JSON.stringify([endScore]));
+  // } else {
+  //   // set score value to LS
+  //   scoreFromLS.push(endScore);
+  //   localStorage.setItem("score", JSON.stringify(scoreFromLS));
+  // }
 };
 
 const renderHighScores = function () {
