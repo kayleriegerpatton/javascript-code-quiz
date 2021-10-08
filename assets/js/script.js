@@ -109,10 +109,8 @@ const verifyAnswer = function (event) {
   const target = event.target;
 
   const userClicked = target.getAttribute("data-option");
-  console.log(userClicked);
 
   const correctAnswer = currentTarget.getAttribute("data-answer");
-  console.log(correctAnswer);
 
   if (questionIndex === questionsArray.length - 1) {
     isGameCompleted = true;
@@ -244,26 +242,30 @@ const renderScoreForm = function () {
   }
 };
 
-const winnerInitials = "KJRP";
+const winnerInitials = toUpperCase("kjrp");
 
 const submitScore = function (event) {
   // prevent default form submission
   event.stopPropagation();
 
-  //   get from LS
-  const initialsFromLS = localStorage.getItem("initials");
-  //   if empty then set empty array in LS
+  //   get initials from LS
+  const initialsFromLS = JSON.parse(localStorage.getItem("initials"));
+  //   if empty then set empty array for initials in LS
   if (!initialsFromLS) {
-    const initials = [winnerInitials];
-
     // set into LS
-    localStorage.setItem("initials", JSON.stringify(initials));
+    localStorage.setItem("initials", JSON.stringify([]));
   } else {
     // set initials input and counter value to LS
-    const initialsArray = JSON.parse(initialsFromLS);
-    initialsArray.push(winnerInitials);
-    localStorage.setItem("initials", JSON.stringify(initialsArray));
+    // const initialsArray = JSON.parse(initialsFromLS);
+    // initialsArray.push(winnerInitials);
+    initialsFromLS.push(winnerInitials);
+    localStorage.setItem("initials", JSON.stringify(initialsFromLS));
   }
+
+  const createScoresList = function (eachInitials, initialsIndex) {};
+
+  //   insert forEach on initialsFromLS
+  initialsFromLS.forEach(createScoresList());
 
   return;
 };
