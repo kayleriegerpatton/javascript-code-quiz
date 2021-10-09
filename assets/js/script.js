@@ -60,8 +60,6 @@ const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
 // high scores html
-const clearScoresBtn = document.querySelector("#clear-scores");
-const highScoresList = document.querySelector("#high-scores-list");
 
 // render question container
 const renderQuestion = function () {
@@ -234,9 +232,7 @@ const renderScoreForm = function () {
     formDiv.setAttribute("id", "initials-form");
 
     // append 3 children to div
-    formDiv.appendChild(scoreTitle);
-    formDiv.appendChild(scoreText);
-    formDiv.appendChild(form);
+    formDiv.append(scoreTitle, scoreText, form);
 
     //   append div to main
     mainContainer.appendChild(formDiv);
@@ -245,66 +241,45 @@ const renderScoreForm = function () {
 
 // construct high scores list
 const renderScoresList = function (initialsFromLS) {
-  const createScoresList = function (eachInitials, initialsIndex) {
+  const constructScoresList = function (eachInitials, initialsIndex) {
     const scoreListItem = document.createElement("li");
     scoreListItem.setAttribute("class", "scores-list-item");
     scoreListItem.textContent = eachInitials;
     highScoresList.appendChild(scoreListItem);
   };
   highScoresList.innerHTML = "";
+
   //   insert forEach on initialsFromLS
-  initialsFromLS.forEach(createScoresList);
+  initialsFromLS.forEach(constructScoresList);
 };
 
 const submitScore = function () {
   // get input value (initials)
-  let winnerInitials = document.querySelector("#initials").value;
+  let winnerInitials = document.getElementById("#initials").value;
 
   // get score value from counter
-  // let endScore = counter;
+  let finalScore = counter;
 
-  //   get initials and score from LS
-  const initialsFromLS = JSON.parse(localStorage.getItem("initials"));
+  // //   get initials and score from LS
+  // const initialsFromLS = JSON.parse(localStorage.getItem("initials"));
   // const scoreFromLS = JSON.parse(localStorage.getItem("score"));
 
-  //   if empty, set arrays for initials and score in LS
-  if (!initialsFromLS) {
-    // set into LS
-    localStorage.setItem("initials", JSON.stringify([winnerInitials]));
-    renderScoresList(winnerInitials);
-  } else {
-    // set initials input to LS
-    initialsFromLS.push(winnerInitials);
-    localStorage.setItem("initials", JSON.stringify(initialsFromLS));
+  // //   if empty, set arrays for initials and score in LS
+  // if (!initialsFromLS || !scoreFromLS) {
+  //   // set initials into LS
+  //   localStorage.setItem("initials", JSON.stringify([winnerInitials]));
 
-    renderScoresList(initialsFromLS);
-  }
-
-  // if (!scoreFromLS) {
-  //   // set into LS
-  //   localStorage.setItem("score", JSON.stringify([endScore]));
+  //   // set score into LS
+  //   localStorage.setItem("score", JSON.stringify([finalScore]));
   // } else {
-  //   // set score value to LS
-  //   scoreFromLS.push(endScore);
+  //   // set initials input to LS
+  //   initialsFromLS.push(winnerInitials);
+  //   localStorage.setItem("initials", JSON.stringify(initialsFromLS));
+  //   // set score to LS
+  //   scoreFromLS.push(finalScore);
   //   localStorage.setItem("score", JSON.stringify(scoreFromLS));
+
   // }
-};
-
-const renderHighScores = function () {
-  // get scores & initials from LS
-  //   print to page
-  return;
-};
-
-// clear high scores from local storage and page
-const clearHighScores = function () {
-  console.log("clear scores");
-
-  //   clear local storage
-  //   event.preventDefault();
-  //   localStorage.clear();
-
-  //   remove scores from page
 };
 
 const startTimer = function () {
@@ -338,6 +313,3 @@ const startQuiz = function () {
 
 // startQuiz click event
 startButton.addEventListener("click", startQuiz);
-
-// clear scores click event
-// clearScoresBtn.addEventListener("click", clearHighScores);
