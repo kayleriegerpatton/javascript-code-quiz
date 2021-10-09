@@ -1,11 +1,8 @@
 const clearScoresBtn = document.querySelector("#clear-scores");
 const highScoresList = document.querySelector("#high-scores-list");
 
-const renderHighScores = function () {
-  // get scores & initials from LS
-  //   print to page
-  return;
-};
+// get scores/initials from LS
+// create & append to high scores list
 
 // clear high scores
 const clearHighScores = function () {
@@ -13,7 +10,11 @@ const clearHighScores = function () {
   localStorage.clear();
 
   //   remove scores list items from page
+  highScoresList.innerHTML = "";
 };
+
+// load event listener
+// document.addEventListener("load", renderScoresList);
 
 // clear scores click event
 clearScoresBtn.addEventListener("click", clearHighScores);

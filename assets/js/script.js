@@ -240,46 +240,43 @@ const renderScoreForm = function () {
 };
 
 // construct high scores list
-const renderScoresList = function (initialsFromLS) {
-  const constructScoresList = function (eachInitials, initialsIndex) {
-    const scoreListItem = document.createElement("li");
-    scoreListItem.setAttribute("class", "scores-list-item");
-    scoreListItem.textContent = eachInitials;
-    highScoresList.appendChild(scoreListItem);
-  };
-  highScoresList.innerHTML = "";
+// const renderScoresList = function (initialsFromLS) {
+//   const constructScoresList = function (eachInitials, initialsIndex) {
+//     const scoreListItem = document.createElement("li");
+//     scoreListItem.setAttribute("class", "scores-list-item");
+//     scoreListItem.textContent = eachInitials;
+//     highScoresList.appendChild(scoreListItem);
+//   };
+//   highScoresList.innerHTML = "";
 
-  //   insert forEach on initialsFromLS
-  initialsFromLS.forEach(constructScoresList);
-};
+//   //   insert forEach on initialsFromLS
+//   initialsFromLS.forEach(constructScoresList);
+// };
 
 const submitScore = function () {
-  // get input value (initials)
-  let winnerInitials = document.getElementById("#initials").value;
+  // get form input value (initials)
+  // let winnerInitials = document.getElementById("#initials").value;
+  let winnerInitials = "kjrp";
 
   // get score value from counter
   let finalScore = counter;
 
-  // //   get initials and score from LS
-  // const initialsFromLS = JSON.parse(localStorage.getItem("initials"));
-  // const scoreFromLS = JSON.parse(localStorage.getItem("score"));
+  // create winner details object
+  const winnerDetails = {
+    score: finalScore,
+    initials: winnerInitials,
+  };
+  console.log(winnerDetails);
 
-  // //   if empty, set arrays for initials and score in LS
-  // if (!initialsFromLS || !scoreFromLS) {
-  //   // set initials into LS
-  //   localStorage.setItem("initials", JSON.stringify([winnerInitials]));
+  const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
+  if (!highScoresFromLS) {
+    localStorage.setItem("highScores", JSON.stringify([winnerDetails]));
+  } else {
+    highScoresFromLS.push(winnerDetails);
+    highScoresFromLS.sort((a, b) => b.score - a.score);
+  }
 
-  //   // set score into LS
-  //   localStorage.setItem("score", JSON.stringify([finalScore]));
-  // } else {
-  //   // set initials input to LS
-  //   initialsFromLS.push(winnerInitials);
-  //   localStorage.setItem("initials", JSON.stringify(initialsFromLS));
-  //   // set score to LS
-  //   scoreFromLS.push(finalScore);
-  //   localStorage.setItem("score", JSON.stringify(scoreFromLS));
-
-  // }
+  localStorage.setItem("highScores", JSON.stringify(highScoresFromLS));
 };
 
 const startTimer = function () {
