@@ -186,7 +186,7 @@ const renderScoreForm = function () {
 
     // render anchor tag
     const scoresLink = document.createElement("a");
-    // scoresLink.setAttribute("href", "./highscores.html");
+    scoresLink.setAttribute("href", "./highscores.html");
     scoresLink.setAttribute("id", "form-submit");
     scoresLink.textContent = "Submit";
 
