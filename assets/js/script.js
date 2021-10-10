@@ -255,28 +255,36 @@ const renderScoreForm = function () {
 
 const submitScore = function () {
   // get form input value (initials)
-  // let winnerInitials = document.getElementById("#initials").value;
-  let winnerInitials = "kjrp";
+  let winnerInitials = document.getElementById("initials").value;
 
   // get score value from counter
   let finalScore = counter;
 
-  // create winner details object
+  // create winner details object for LS
   const winnerDetails = {
     score: finalScore,
     initials: winnerInitials,
   };
-  console.log(winnerDetails);
+  // console.log(winnerDetails);
 
+  // get from LS
   const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
   if (!highScoresFromLS) {
-    localStorage.setItem("highScores", JSON.stringify([winnerDetails]));
+    // declare data for LS
+    const highScores = [winnerDetails];
+
+    // set in LS
+    localStorage.setItem("highScores", JSON.stringify(highScores));
   } else {
-    highScoresFromLS.push(winnerDetails);
-    highScoresFromLS.sort((a, b) => b.score - a.score);
+    const myScoresArray = highScoresFromLS;
+    // push new data into array
+    myScoresArray.push(winnerDetails);
+
+    // set array data in LS
+    localStorage.setItem("highScores", JSON.stringify(myScoresArray));
   }
 
-  localStorage.setItem("highScores", JSON.stringify(highScoresFromLS));
+  // localStorage.setItem("highScores", JSON.stringify(highScoresFromLS));
 };
 
 const startTimer = function () {
