@@ -45,7 +45,7 @@ const questionsArray = [
 let isGameCompleted = false;
 
 // set timer start value
-let counter = 5;
+let counter = 5 * questionsArray.length;
 
 // set questions array index number
 let questionIndex = 0;
@@ -59,7 +59,6 @@ const headerContainer = document.querySelector(".header-container");
 const startButton = document.querySelector("#start-button");
 const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
-// high scores html
 
 // render question container
 const renderQuestion = function () {
