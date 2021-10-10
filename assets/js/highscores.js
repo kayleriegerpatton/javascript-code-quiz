@@ -6,25 +6,23 @@ const getScoreData = function () {
   const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
   console.log(highScoresFromLS);
 
-  //   const getWinnerDetails = function () {};
+  // create & append to high scores list
+  const renderScoresList = function (eachObject) {
+    // console.log(eachObject.score + " " + eachObject.initials);
 
-  //   highScoresList.forEach(getWinnerDetails);
+    const scoreListItem = document.createElement("li");
+    scoreListItem.setAttribute("class", "scores-list-item");
+    scoreListItem.textContent = eachObject.score + " - " + eachObject.initials;
+    highScoresList.appendChild(scoreListItem);
+
+    // highScoresList.innerHTML = "";
+  };
+  highScoresFromLS.forEach(renderScoresList);
 };
 
 // get score value from array object & declare as variable?
 
 // get initials string from array object & declare as variable?
-
-// create & append to high scores list
-// const renderScoresList = function (myScoresArray) {
-//     const constructScoresList = function () {
-//       const scoreListItem = document.createElement("li");
-//       scoreListItem.setAttribute("class", "scores-list-item");
-//       scoreListItem.textContent = ;
-//       highScoresList.appendChild(scoreListItem);
-//     };
-//     highScoresList.innerHTML = "";
-// };
 
 // clear high scores
 const clearHighScores = function () {
@@ -37,7 +35,7 @@ const clearHighScores = function () {
 
 // window load event listener
 window.addEventListener("load", getScoreData);
-// window.addEventListener("load", renderScoresList);
+window.addEventListener("load", renderScoresList);
 
 // clear scores click event
 clearScoresBtn.addEventListener("click", clearHighScores);
