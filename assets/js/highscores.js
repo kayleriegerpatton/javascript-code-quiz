@@ -4,7 +4,7 @@ const highScoresList = document.querySelector("#high-scores-list");
 // get scores/initials from LS (array of objects)
 const getScoreData = function () {
   const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
-  console.log(highScoresFromLS);
+  //   console.log(highScoresFromLS);
 
   const getWinnerDetails = function () {};
 

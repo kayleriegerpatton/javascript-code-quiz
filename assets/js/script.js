@@ -107,12 +107,15 @@ const verifyAnswer = function (event) {
   const target = event.target;
 
   const userClicked = target.getAttribute("data-option");
-
+  console.log(userClicked);
   const correctAnswer = currentTarget.getAttribute("data-answer");
+  console.log(correctAnswer);
 
   if (questionIndex === questionsArray.length - 1) {
-    isGameCompleted = true;
-    renderScoreForm();
+    if (userClicked === correctAnswer) {
+      isGameCompleted = true;
+      renderScoreForm();
+    }
     return;
   }
 
