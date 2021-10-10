@@ -31,6 +31,10 @@ THEN the scores displayed on the page and the local storage are cleared
 WHEN the user clicks the Go Back button  
 THEN they are taken to the starting page
 
+## Deployed Application
+
+[GitHub Pages](https://kayleriegerpatton.github.io/javascript-code-quiz/)
+
 ## Screenshots
 
 ### Start Page:
@@ -45,7 +49,7 @@ THEN they are taken to the starting page
 
 ![Quiz game over page](assets/images/screenshots/quiz-gameover.png)
 
-### Win
+### Win Display
 
 ![Quiz win display with initials submission form](assets/images/screenshots/quiz-win.png)
 
