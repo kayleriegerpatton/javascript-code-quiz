@@ -35,6 +35,9 @@ body {
   margin: auto;
   padding: 0 40px;
 }
+.h1-center {
+  text-align: center;
+}
 
 .start-text,
 #game-over,

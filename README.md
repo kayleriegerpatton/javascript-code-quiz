@@ -1,6 +1,8 @@
-# Javascript Code Quiz
+# JavaScript Code Quiz
 
-A timed, multiple-choice Javascript fundamentals quiz that stores high scores.
+A timed, multiple-choice JavaScript fundamentals quiz that stores high scores.
+
+To beat the clock, users must correctly answer all questions--each incorrect answer loses them 5 seconds! Winners can store their initials and view a list of high scores before playing again. With a simple and responsive design, the quiz is easy to expand with additional questions and an adjusted timer value.
 
 ## User Story
 
@@ -33,8 +35,20 @@ THEN they are taken to the starting page
 
 ### Start Page:
 
+![Quiz start page](assets/images/screenshots/quiz-start.png)
+
 ### Question Display:
+
+![Quiz question display with multiple choice format](assets/images/screenshots/quiz-question.png)
 
 ### Game Over:
 
+![Quiz game over page](assets/images/screenshots/quiz-gameover.png)
+
+### Win
+
+![Quiz win display with initials submission form](assets/images/screenshots/quiz-win.png)
+
 ### High Scores:
+
+![Quiz high scores page with list of scores and initials](assets/images/screenshots/quiz-highscores.png)

@@ -241,7 +241,12 @@ const renderScoreForm = function () {
 
 const submitScore = function () {
   // get form input value (initials)
-  let winnerInitials = document.getElementById("initials").value;
+  let winnerInitials = document.getElementById("initials").value.toUpperCase();
+
+  if (/\d/g.test(winnerInitials)) {
+    alert("Please enter only letters.");
+    return;
+  }
 
   // get score value from counter
   let finalScore = counter;
