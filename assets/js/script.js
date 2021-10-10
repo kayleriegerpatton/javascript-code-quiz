@@ -266,6 +266,7 @@ const submitScore = function () {
     const myScoresArray = highScoresFromLS;
     // push new data into array
     myScoresArray.push(winnerDetails);
+    myScoresArray.sort((a, b) => b.score - a.score);
 
     // set array data in LS
     localStorage.setItem("highScores", JSON.stringify(myScoresArray));

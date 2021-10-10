@@ -4,11 +4,11 @@ const highScoresList = document.querySelector("#high-scores-list");
 // get scores/initials from LS (array of objects)
 const getScoreData = function () {
   const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
-  //   console.log(highScoresFromLS);
+  console.log(highScoresFromLS);
 
-  const getWinnerDetails = function () {};
+  //   const getWinnerDetails = function () {};
 
-  highScoresList.forEach(getWinnerDetails);
+  //   highScoresList.forEach(getWinnerDetails);
 };
 
 // get score value from array object & declare as variable?
