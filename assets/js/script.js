@@ -40,6 +40,30 @@ const questionsArray = [
     ],
     correctAnswer: "a. parse the string values",
   },
+  {
+    question: "What does the 'return' keyword do?",
+    answers: [
+      "a. brings data out of the function to make it accessible",
+      "b. returns to the beginning of the function block",
+      "c. retrieves unreachable code and creates a global variable",
+    ],
+    correctAnswer: "a. brings data out of the function to make it accessible",
+  },
+  {
+    question: "Which of these is not a valid variable name in JavaScript?",
+    answers: ["a. myVariable", "b. second_variable", "c. 3rdVariable"],
+    correctAnswer: "c. 3rdVariable",
+  },
+  {
+    question: "Which is the correct way to write a JS array?",
+    answers: [
+      "a. const myArray = [0: 'arrayItem1', 1: 'arrayItem2', 2: 'arrayItem3']",
+      "b. const myArray = ['arrayItem1', 'arrayItem2', 'arrayItem3']",
+      "c. const myArray = {'arrayItem1', 'arrayItem2', 'arrayItem3'}",
+    ],
+    correctAnswer:
+      "b. const myArray = ['arrayItem1', 'arrayItem2', 'arrayItem3']",
+  },
 ];
 
 let isGameCompleted = false;
@@ -144,7 +168,7 @@ const renderGameOver = function () {
   // render link to start
   const newStartLink = document.createElement("a");
   newStartLink.setAttribute("href", "./index.html");
-  newStartLink.textContent = "Start Quiz";
+  newStartLink.textContent = "Try Again";
 
   //   render new start button, append anchor
   const newStartButton = document.createElement("button");
@@ -186,7 +210,7 @@ const renderScoreForm = function () {
 
     // render anchor tag
     const scoresLink = document.createElement("a");
-    scoresLink.setAttribute("href", "./highscores.html");
+    // scoresLink.setAttribute("href", "./highscores.html");
     scoresLink.setAttribute("id", "form-submit");
     scoresLink.textContent = "Submit";
 
@@ -240,35 +264,47 @@ const renderScoreForm = function () {
 };
 
 const submitScore = function () {
-  // get form input value (initials)
-  let winnerInitials = document.getElementById("initials").value.toUpperCase();
+  window.location.href = "highscores.html";
 
-  // get score value from counter
-  let finalScore = counter;
+  // let initials = document.getElementById("initials").value;
 
-  // create winner details object for LS
-  const winnerDetails = {
-    score: finalScore,
-    initials: winnerInitials,
-  };
+  // // validate input value is not empty
+  // if (initials === "hi") {
+  //   // get form input value (initials)
+  //   let winnerInitials = document
+  //     .getElementById("initials")
+  //     .value.toUpperCase();
 
-  // get from LS
-  const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
-  if (!highScoresFromLS) {
-    // declare data for LS
-    const highScores = [winnerDetails];
+  //   // get score value from counter
+  //   let finalScore = counter;
 
-    // set in LS
-    localStorage.setItem("highScores", JSON.stringify(highScores));
-  } else {
-    const myScoresArray = highScoresFromLS;
-    // push new data into array
-    myScoresArray.push(winnerDetails);
-    myScoresArray.sort((a, b) => b.score - a.score);
+  //   // create winner details object for LS
+  //   const winnerDetails = {
+  //     score: finalScore,
+  //     initials: winnerInitials,
+  //   };
 
-    // set array data in LS
-    localStorage.setItem("highScores", JSON.stringify(myScoresArray));
-  }
+  //   // get from LS
+  //   const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
+  //   if (!highScoresFromLS) {
+  //     // declare data for LS
+  //     const highScores = [winnerDetails];
+
+  //     // set in LS
+  //     localStorage.setItem("highScores", JSON.stringify(highScores));
+  //   } else {
+  //     const myScoresArray = highScoresFromLS;
+  //     // push new data into array
+  //     myScoresArray.push(winnerDetails);
+  //     myScoresArray.sort((a, b) => b.score - a.score);
+
+  //     // set array data in LS
+  //     localStorage.setItem("highScores", JSON.stringify(myScoresArray));
+  //   }
+  //   window.location.href = "highscores.html";
+  // } else {
+  //   alert("Please enter your initials.");
+  // }
 };
 
 const startTimer = function () {
