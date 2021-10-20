@@ -264,47 +264,45 @@ const renderScoreForm = function () {
 };
 
 const submitScore = function () {
-  window.location.href = "highscores.html";
+  let initials = document.getElementById("initials").value;
 
-  // let initials = document.getElementById("initials").value;
+  // validate input value is not empty
+  if (initials === "hi") {
+    // get form input value (initials)
+    let winnerInitials = document
+      .getElementById("initials")
+      .value.toUpperCase();
 
-  // // validate input value is not empty
-  // if (initials === "hi") {
-  //   // get form input value (initials)
-  //   let winnerInitials = document
-  //     .getElementById("initials")
-  //     .value.toUpperCase();
+    // get score value from counter
+    let finalScore = counter;
 
-  //   // get score value from counter
-  //   let finalScore = counter;
+    // create winner details object for LS
+    const winnerDetails = {
+      score: finalScore,
+      initials: winnerInitials,
+    };
 
-  //   // create winner details object for LS
-  //   const winnerDetails = {
-  //     score: finalScore,
-  //     initials: winnerInitials,
-  //   };
+    // get from LS
+    const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
+    if (!highScoresFromLS) {
+      // declare data for LS
+      const highScores = [winnerDetails];
 
-  //   // get from LS
-  //   const highScoresFromLS = JSON.parse(localStorage.getItem("highScores"));
-  //   if (!highScoresFromLS) {
-  //     // declare data for LS
-  //     const highScores = [winnerDetails];
+      // set in LS
+      localStorage.setItem("highScores", JSON.stringify(highScores));
+    } else {
+      const myScoresArray = highScoresFromLS;
+      // push new data into array
+      myScoresArray.push(winnerDetails);
+      myScoresArray.sort((a, b) => b.score - a.score);
 
-  //     // set in LS
-  //     localStorage.setItem("highScores", JSON.stringify(highScores));
-  //   } else {
-  //     const myScoresArray = highScoresFromLS;
-  //     // push new data into array
-  //     myScoresArray.push(winnerDetails);
-  //     myScoresArray.sort((a, b) => b.score - a.score);
-
-  //     // set array data in LS
-  //     localStorage.setItem("highScores", JSON.stringify(myScoresArray));
-  //   }
-  //   window.location.href = "highscores.html";
-  // } else {
-  //   alert("Please enter your initials.");
-  // }
+      // set array data in LS
+      localStorage.setItem("highScores", JSON.stringify(myScoresArray));
+    }
+    window.location.href = "highscores.html";
+  } else {
+    alert("Please enter your initials.");
+  }
 };
 
 const startTimer = function () {
