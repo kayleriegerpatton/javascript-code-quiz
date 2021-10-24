@@ -85,7 +85,7 @@ const startContainer = document.querySelector("#start-container");
 const mainContainer = document.querySelector("#main-container");
 
 // render question container
-const renderQuestion = function () {
+const renderQuestion = () => {
   // get question
   const question = questionsArray[questionIndex];
 
@@ -126,7 +126,7 @@ const renderQuestion = function () {
   mainContainer.appendChild(questionContainer);
 };
 
-const verifyAnswer = function (event) {
+const verifyAnswer = (event) => {
   const currentTarget = event.currentTarget;
   const target = event.target;
 
@@ -156,12 +156,12 @@ const verifyAnswer = function (event) {
 };
 
 // remove question container
-const removeQuestion = function () {
+const removeQuestion = () => {
   document.getElementById("question-container").remove();
 };
 
 // renderGameOver
-const renderGameOver = function () {
+const renderGameOver = () => {
   counterSpan.textContent = 0;
   removeQuestion();
 
@@ -203,22 +203,15 @@ const renderGameOver = function () {
 };
 
 // renderScoreForm
-const renderScoreForm = function () {
+const renderScoreForm = () => {
   if (isGameCompleted) {
     //   remove question container
     removeQuestion();
-
-    // render anchor tag
-    const scoresLink = document.createElement("a");
-    // scoresLink.setAttribute("href", "./highscores.html");
-    scoresLink.setAttribute("id", "form-submit");
-    scoresLink.textContent = "Submit";
 
     //   render submit button
     const formButton = document.createElement("button");
     formButton.setAttribute("class", "button");
     formButton.setAttribute("id", "form-button");
-    formButton.appendChild(scoresLink);
 
     // set submit score click event listener
     formButton.addEventListener("click", submitScore);
@@ -263,18 +256,19 @@ const renderScoreForm = function () {
   }
 };
 
-const submitScore = function () {
-  let initials = document.getElementById("initials").value;
+const submitScore = (event) => {
+  event.preventDefault();
+  const initials = document.getElementById("initials").value;
 
   // validate input value is not empty
-  if (initials === "hi") {
+  if (initials) {
     // get form input value (initials)
-    let winnerInitials = document
+    const winnerInitials = document
       .getElementById("initials")
       .value.toUpperCase();
 
     // get score value from counter
-    let finalScore = counter;
+    const finalScore = counter;
 
     // create winner details object for LS
     const winnerDetails = {
@@ -299,13 +293,13 @@ const submitScore = function () {
       // set array data in LS
       localStorage.setItem("highScores", JSON.stringify(myScoresArray));
     }
-    window.location.href = "highscores.html";
+    window.location.href = "./highscores.html";
   } else {
     alert("Please enter your initials.");
   }
 };
 
-const startTimer = function () {
+const startTimer = () => {
   // set timer & display
   const timerTick = function () {
     if (counter <= 0 && !isGameCompleted) {
@@ -328,7 +322,7 @@ const startTimer = function () {
 };
 
 // start quiz
-const startQuiz = function () {
+const startQuiz = () => {
   startContainer.remove();
   startTimer();
   renderQuestion();
