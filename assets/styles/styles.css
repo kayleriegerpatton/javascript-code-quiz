@@ -1,0 +1,132 @@
+:root {
+  --purple: #763196;
+  --button-hover: #944cb6;
+  --field-background: #f0e6fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.header-item a {
+  text-decoration: none;
+  color: var(--purple);
+}
+
+.header-item p {
+  margin-top: 0px;
+}
+
+#start-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 0 40px;
+}
+.h1-center {
+  text-align: center;
+}
+
+.start-text,
+#game-over,
+#game-over-text {
+  text-align: center;
+}
+
+#button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button {
+  margin: 5px auto;
+  padding: 5px;
+  color: #ffff;
+  background-color: var(--purple);
+  border-radius: 10%;
+}
+
+.button:hover {
+  background-color: var(--button-hover);
+}
+
+/* Question Cards Render */
+#question-text {
+  text-align: center;
+}
+
+#question-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 400px;
+  margin: auto;
+}
+
+#answer-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.answerButton {
+  margin: 5px 10px;
+  padding: 5px;
+  color: #ffff;
+  background-color: var(--purple);
+  border-radius: 10%;
+  text-align: left;
+}
+
+/* Game Over Render */
+#new-start-div {
+  display: flex;
+  justify-content: center;
+}
+
+/* Register Score Page Render */
+#initials-form {
+  max-width: 400px;
+  margin: auto;
+  padding-top: 40px;
+}
+
+#form-button {
+  margin: 10px;
+}
+
+.button a {
+  color: #ffff;
+  text-decoration: none;
+}
+
+/* High Scores Page */
+#scores-container {
+  max-width: 500px;
+  margin: auto;
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#high-scores-list {
+  background-color: var(--field-background);
+}
+
+.scores-list-item {
+  padding: 5px;
+}
