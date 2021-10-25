@@ -35,6 +35,12 @@ THEN they are taken to the starting page
 
 [GitHub Pages](https://kayleriegerpatton.github.io/javascript-code-quiz/)
 
+## Built With
+
+- CSS
+- HTML
+- Javascript
+
 ## Screenshots
 
 ### Start Page:
@@ -49,7 +55,7 @@ THEN they are taken to the starting page
 
 ![Quiz game over page](assets/images/screenshots/quiz-gameover.png)
 
-### Win Display
+### Win Display:
 
 ![Quiz win display with initials submission form](assets/images/screenshots/quiz-win.png)
 

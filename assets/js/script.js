@@ -231,6 +231,7 @@ const renderScoreForm = () => {
     //  render form
     const form = document.createElement("form");
     form.setAttribute("action", "");
+    form.setAttribute("id", "submit-form");
 
     // append 3 children to form
     form.appendChild(formLabel);
