@@ -210,6 +210,7 @@ const renderScoreForm = () => {
 
     //   render submit button
     const formButton = document.createElement("button");
+    formButton.textContent = "Submit";
     formButton.setAttribute("class", "button");
     formButton.setAttribute("id", "form-button");
 
