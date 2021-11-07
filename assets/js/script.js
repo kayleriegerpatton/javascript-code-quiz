@@ -99,7 +99,7 @@ const renderQuestion = () => {
   buttonContainer.setAttribute("id", "answer-buttons");
 
   //   create answer buttons and append with for each
-  const renderAnswers = function (eachAnswer, index) {
+  const renderAnswers = (eachAnswer, index) => {
     const answerButton = document.createElement("button");
     answerButton.setAttribute("class", "answerButton");
     answerButton.setAttribute("id", index);
@@ -303,7 +303,7 @@ const submitScore = (event) => {
 
 const startTimer = () => {
   // set timer & display
-  const timerTick = function () {
+  const timerTick = () => {
     if (counter <= 0 && !isGameCompleted) {
       clearInterval(timer);
       renderGameOver();
